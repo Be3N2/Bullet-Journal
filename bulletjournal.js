@@ -24,8 +24,8 @@ function preload() {
 
 function setup() {
   canvas = createCanvas(WIDTH, HEIGHT);
-  canvas.position(200, 100);
-  canvas.class("lemon");
+  canvas.parent("#canvas");
+
   background(180);
   
   createDays();
