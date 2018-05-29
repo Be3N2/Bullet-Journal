@@ -18,10 +18,6 @@ var data = {
 var days = [];
 var canvas;
 
-function preload() {
-	//data = loadJSON("data.json");
-}
-
 function setup() {
   canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent("#canvas");
@@ -32,7 +28,6 @@ function setup() {
 
   for (dayObject in days) {
   	days[dayObject].draw();
-  	//console.log(days[dayObject].month);
   }
 
 }
@@ -55,7 +50,7 @@ function createDays() {
 }
 
 function mouseClicked() {
-	//console.log(mouseX);
+	
 	//if its within the canvas
 	if (mouseX < WIDTH && mouseY < HEIGHT) {
 		for (let y = 0; y < 32; y++) {
