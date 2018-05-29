@@ -16,13 +16,16 @@ var data = {
 };
 
 var days = [];
+var canvas;
 
 function preload() {
 	//data = loadJSON("data.json");
 }
 
 function setup() {
-  createCanvas(WIDTH, HEIGHT);
+  canvas = createCanvas(WIDTH, HEIGHT);
+  canvas.position(200, 100);
+  canvas.class("lemon");
   background(180);
   
   createDays();

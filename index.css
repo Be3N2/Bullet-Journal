@@ -1,0 +1,15 @@
+body {
+	text-align: center;
+}
+
+.title {
+	font-size: 125px;
+	margin-top: 25px;
+	margin-bottom: 0px;
+}
+
+.subtitle {
+	font-size: 80px;
+	text-align: right;
+}
+
