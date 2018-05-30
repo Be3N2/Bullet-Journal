@@ -1,10 +1,12 @@
 class calendarObj {
 
-	constructor (width, height, datas2) {
+	constructor (width, height, datas2, offX, offY) {
 		this.datas = datas2;
 		this.days = [];
 		this.WIDTH = width;
 		this.HEIGHT = height;
+		this.offsetX = offX;
+		this.offsetY = offY;
 	}
 
 	createDays() {
@@ -26,24 +28,26 @@ class calendarObj {
 
 	render() {
 		for (let dayObject in this.days) {
-		  	this.days[dayObject].draw();
+		  	this.days[dayObject].draw(this.offsetX, this.offsetY);
 		  }
 	}
 
 	mouseAction(mouseX, mouseY) {
 		//if its within the canvas
+		mouseX -= this.offsetX;
+		mouseY -= this.offsetY;
 		if (mouseX < this.WIDTH && mouseY < this.HEIGHT) {
 			for (let y = 0; y < 32; y++) {
 				for (let x = 0; x < 12; x++) {
-					if (mouseX > 0 + x * this.WIDTH/12 && mouseX < this.WIDTH/12 + x * this.WIDTH/12) {
-						if (mouseY > 0 + y * this.WIDTH/12 && mouseY < this.WIDTH/12 + y * this.WIDTH/12) {
+					if (mouseX > 0 + x * this.WIDTH/12 && mouseX <= this.WIDTH/12 + x * this.WIDTH/12) {
+						if (mouseY > 0 + y * this.WIDTH/12 && mouseY <= this.WIDTH/12 + y * this.WIDTH/12) {
 							for (let dayObject in this.days) {
 								if (this.days[dayObject].monthNum == x + 1 && this.days[dayObject].number == y + 1) {
 									this.days[dayObject].selected = true;
 								} else {
 									this.days[dayObject].selected = false;
 								}
-								this.days[dayObject].draw();
+								this.days[dayObject].draw(this.offsetX, this.offsetY);
 							}
 						}
 					}

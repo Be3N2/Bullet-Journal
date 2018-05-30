@@ -16,12 +16,12 @@ class dayObj {
 
 	}
 
-	draw() {
+	draw(offsetX, offsetY) {
 		if (!this.selected) {
 			fill(this.fillColorx, this.fillcolorY, this.fillcolorZ);
 		} else {
 			fill(255, 0, 255);
 		}
-		rect(this.x, this.y, this.width, this.width);
+		rect(this.x + offsetX, this.y + offsetY, this.width, this.width);
 	}
 }

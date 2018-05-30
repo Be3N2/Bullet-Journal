@@ -16,14 +16,18 @@ var data = {
 
 var canvas;
 var calendar;
+var calpositionX;
+var calpositionY;
 
 function setup() {
-  canvas = createCanvas(12 * 25, 12 * 25 * 3);
-  canvas.parent("#canvas");
+  canvas = createCanvas(1000, 1000);
 
-  calendar = new calendarObj(WIDTH,HEIGHT,data);
+  calpositionX = 300;
+  calpositionY = 200;
 
-  background(180);
+  calendar = new calendarObj(12 * 25,12 * 25 * 3,data,calpositionX,calpositionY);
+
+  background(255);
   
   calendar.createDays();
 
@@ -36,7 +40,7 @@ function draw() {
 }
 
 function mouseClicked() {
-
+	console.log(mouseX + "  |  " + mouseY);
 	calendar.mouseAction(mouseX, mouseY);
 
 }
