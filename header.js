@@ -13,6 +13,7 @@ class header {
 	}
 
 	render() {
+		fill(0);
 		textSize(100);
 		textAlign(RIGHT, TOP);
 		text("<2018>", this.WIDTH / 2, 50);

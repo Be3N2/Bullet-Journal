@@ -15,9 +15,9 @@ var data = {
 };
 
 var eventKey = {
-	"id": 1, "data": {"name": "excited", "R": 255, "G": 100, "B": 255},
-	"id": 2, "data": {"name": "sad", "R": 255, "G": 100, "B": 255},
-	"id": 3, "data": {"name": "depressed", "R": 255, "G": 100, "B": 255}
+	"1": {"id": 1, "data": {"name": "excited", "R": 255, "G": 100, "B": 255}},
+	"2": {"id": 2, "data": {"name": "sad", "R": 255, "G": 100, "B": 255}},
+	"3": {"id": 3, "data": {"name": "depressed", "R": 255, "G": 100, "B": 255}}
 };
 
 var canvas;
@@ -26,6 +26,8 @@ var calendar;
 var eventsObj;
 
 var headerObj;
+
+var rectSize = 25;
 
 function setup() {
   canvas = createCanvas(window.innerWidth, window.innerHeight);
@@ -39,7 +41,7 @@ function setup() {
   let eventsposX = window.innerWidth / 2;
   let eventsposY = calpositionY;
 
-  eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY);
+  eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY, rectSize);
   
   headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
   background(255);
@@ -48,6 +50,7 @@ function setup() {
 
   calendar.render();
   eventsObj.createCategories();
+  eventsObj.render();
   //eventsObj.render();
   headerObj.render();
 
