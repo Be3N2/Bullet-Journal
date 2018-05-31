@@ -34,13 +34,13 @@ class events {
 			let posX = 50;
 			let posY = 50 + (this.gap * (eventNumber - 1));
 
-			this.categories.push(new category(posX, posY, data.name, data.color, this.length));
+			this.categories.push(new category(this.WIDTH - posX, this.length, posX, posY, data.name, data.color, this.length));
 		}
 	}
 
-	resize(offsetX, offsetY) {
-		this.posX = offsetX;
-		this.posY = offsetY;
+	resize(posX, posY) {
+		this.offsetX = posX;
+		this.offsetY = posY;
 	}
 
 }
