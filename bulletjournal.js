@@ -15,9 +15,13 @@ var data = {
 };
 
 var eventKey = {
-	"1": {"id": 1, "data": {"name": "excited", "R": 255, "G": 100, "B": 255}},
-	"2": {"id": 2, "data": {"name": "sad", "R": 255, "G": 100, "B": 255}},
-	"3": {"id": 3, "data": {"name": "depressed", "R": 255, "G": 100, "B": 255}}
+	"1": {"id": 1, "data": {"name": "Angry, frustrated", "color": "#bd0c0c"}},
+	"2": {"id": 2, "data": {"name": "Average, normal, uneventful", "color": "#ca4a26"}},
+	"3": {"id": 3, "data": {"name": "Productive", "color": "#fff23a"}},
+  "4": {"id": 2, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
+  "5": {"id": 2, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
+  "6": {"id": 2, "data": {"name": "Disappointed", "color": "#3022fe"}},
+  "7": {"id": 2, "data": {"name": "Happy", "color": "#ff3af2"}},
 };
 
 var canvas;
@@ -51,7 +55,6 @@ function setup() {
   calendar.render();
   eventsObj.createCategories();
   eventsObj.render();
-  //eventsObj.render();
   headerObj.render();
 
 }

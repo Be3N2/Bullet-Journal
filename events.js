@@ -8,6 +8,7 @@ class events {
 		this.offsetY = offY;
 		this.categories = [];
 		this.length = rectSize;
+		this.gap = 2.5 * rectSize;
 	}
 
 	update() {
@@ -15,8 +16,8 @@ class events {
 	}
 
 	render() {
-		fill(200);
-		rect(this.offsetX, this.offsetY, this.WIDTH, this.HEIGHT);
+		//fill(200);
+		//rect(this.offsetX, this.offsetY, this.WIDTH, this.HEIGHT);
 		for (let categoryObj in this.categories) {
 			this.categories[categoryObj].render(this.offsetX, this.offsetY);
 		}
@@ -31,9 +32,9 @@ class events {
 			let data = object.data;
 			
 			let posX = 50;
-			let posY = 50 + (this.length * (eventNumber - 1));
+			let posY = 50 + (this.gap * (eventNumber - 1));
 
-			this.categories.push(new category(posX, posY, data.name, data.R, data.G, data.B, this.length));
+			this.categories.push(new category(posX, posY, data.name, data.color, this.length));
 		}
 	}
 
