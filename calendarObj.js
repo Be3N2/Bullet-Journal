@@ -5,6 +5,7 @@ class calendarObj {
 		this.days = [];
 		this.WIDTH = width;
 		this.HEIGHT = height;
+		this.length = width / 12;
 		this.offsetX = offX;
 		this.offsetY = offY;
 	}
@@ -15,9 +16,9 @@ class calendarObj {
 			monthNum++;
 			let obj = this.datas[prop];
 			for (let i = 0; i < obj.days; i++) {
-				let posX = (prop - 1) * this.WIDTH / 12;
-				let posY = i * this.WIDTH / 12;
-				this.days.push(new dayObj(obj.name, monthNum, i + 1, posX, posY, this.WIDTH / 12));
+				let posX = (prop - 1) * this.length;
+				let posY = i * this.length;
+				this.days.push(new dayObj(obj.name, monthNum, i + 1, posX, posY, this.length));
 			}
 		}
 	}
@@ -29,7 +30,38 @@ class calendarObj {
 	render() {
 		for (let dayObject in this.days) {
 		  	this.days[dayObject].draw(this.offsetX, this.offsetY);
-		  }
+		}
+		this.renderLabels();
+	}
+
+	renderLabels() {
+		let monthNum = 0;
+
+		fill(0);
+		textSize(18);
+		textAlign(LEFT, TOP);
+
+		for (let prop in this.datas) {
+			monthNum++;
+			let obj = this.datas[prop];
+			
+			let posX = this.offsetX;
+			posX += (monthNum - 1) * this.length;
+
+			let posY = this.offsetY - this.length;
+
+			text(obj.name,posX,posY);
+			
+		}
+
+		for (let i = 1; i <= 30; i++) {
+			if (i % 5 == 0 || i == 1) {
+				let posX = this.offsetX - this.length;
+				let posY = this.offsetY;
+				posY += this.length * (i - 1);
+				text(i, posX, posY);
+			}
+		}
 	}
 
 	mouseAction(mouseX, mouseY) {
@@ -39,8 +71,8 @@ class calendarObj {
 		if (mouseX < this.WIDTH && mouseY < this.HEIGHT) {
 			for (let y = 0; y < 32; y++) {
 				for (let x = 0; x < 12; x++) {
-					if (mouseX > 0 + x * this.WIDTH/12 && mouseX <= this.WIDTH/12 + x * this.WIDTH/12) {
-						if (mouseY > 0 + y * this.WIDTH/12 && mouseY <= this.WIDTH/12 + y * this.WIDTH/12) {
+					if (mouseX > 0 + x * this.length && mouseX <= this.length + x * this.length) {
+						if (mouseY > 0 + y * this.length && mouseY <= this.length + y * this.length) {
 							for (let dayObject in this.days) {
 								if (this.days[dayObject].monthNum == x + 1 && this.days[dayObject].number == y + 1) {
 									this.days[dayObject].selected = true;
@@ -54,6 +86,11 @@ class calendarObj {
 				}
 			}
 		}
+	}
+
+	resize(xOffset, yOffset) {
+		this.offsetX = xOffset;
+		this.offsetY = yOffset;
 	}
 	
 }

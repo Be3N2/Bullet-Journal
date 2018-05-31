@@ -14,24 +14,42 @@ var data = {
 	"12": {"name": "D", "days": 31}
 };
 
+var eventKey = {
+	"id": 1, "data": {"name": "excited", "R": 255, "G": 100, "B": 255},
+	"id": 2, "data": {"name": "sad", "R": 255, "G": 100, "B": 255},
+	"id": 3, "data": {"name": "depressed", "R": 255, "G": 100, "B": 255}
+};
+
 var canvas;
 var calendar;
-var calpositionX;
-var calpositionY;
+
+var eventsObj;
+
+var headerObj;
 
 function setup() {
-  canvas = createCanvas(1000, 1000);
+  canvas = createCanvas(window.innerWidth, window.innerHeight);
 
-  calpositionX = 300;
-  calpositionY = 200;
+  let calpositionX = window.innerWidth / 2 - window.innerWidth / 5;
+  let calpositionY = window.innerHeight / 5;
 
   calendar = new calendarObj(12 * 25,12 * 25 * 3,data,calpositionX,calpositionY);
 
+  //let eventsposX = (window.innerWidth / 2) + ((window.innerWidth/ 5) - (12 * 25));
+  let eventsposX = window.innerWidth / 2;
+  let eventsposY = calpositionY;
+
+  eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY);
+  
+  headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
   background(255);
   
   calendar.createDays();
 
   calendar.render();
+  eventsObj.createCategories();
+  //eventsObj.render();
+  headerObj.render();
 
 }
 
@@ -40,7 +58,22 @@ function draw() {
 }
 
 function mouseClicked() {
-	console.log(mouseX + "  |  " + mouseY);
+	//console.log(mouseX + "  |  " + mouseY);
 	calendar.mouseAction(mouseX, mouseY);
-
 }
+window.onresize = function() {
+  var w = window.innerWidth;
+  var h = window.innerHeight;  
+  canvas.size(w,h);
+  width = w;
+  height = h;
+
+  calendar.resize(window.innerWidth / 2 - window.innerWidth / 5, window.innerHeight / 5);
+  calendar.render();
+
+  eventsObj.resize(window.innerWidth/2, window.innerHeight / 5);
+  eventsObj.render();
+
+  headerObj.resize(window.innerWidth, window.innerHeight);
+  headerObj.render();
+};
