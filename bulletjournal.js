@@ -66,6 +66,7 @@ function draw() {
 function mouseClicked() {
 	//console.log(mouseX + "  |  " + mouseY);
 	calendar.mouseAction(mouseX, mouseY);
+  eventsObj.mouseAction(mouseX, mouseY);
 }
 window.onresize = function() {
   var w = window.innerWidth;

@@ -28,15 +28,29 @@ class calendarObj {
 	}
 
 	render() {
+		//clear calendar area + label area
+		fill(255);
+		strokeWeight(0);
+		rect(this.offsetX - this.length, this.offsetY - this.length, this.WIDTH + this.length * 2, this.HEIGHT + this.length * 2);
+		strokeWeight(1);
+
+		//draw all the days
 		for (let dayObject in this.days) {
 		  	this.days[dayObject].draw(this.offsetX, this.offsetY);
 		}
+		for (let dayObject in this.days) {
+			if (this.days[dayObject].selected) {
+				this.days[dayObject].draw(this.offsetX, this.offsetY);
+			}
+		}
+		//draw the labels
 		this.renderLabels();
 	}
 
 	renderLabels() {
 		let monthNum = 0;
 
+		strokeWeight(1);
 		fill(0);
 		textSize(18);
 		textAlign(LEFT, TOP);
@@ -79,13 +93,13 @@ class calendarObj {
 								} else {
 									this.days[dayObject].selected = false;
 								}
-								this.days[dayObject].draw(this.offsetX, this.offsetY);
 							}
 						}
 					}
 				}
 			}
 		}
+		this.render();
 	}
 
 	resize(xOffset, yOffset) {

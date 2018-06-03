@@ -10,13 +10,24 @@ class category {
 		this.hex = hexCol;
 		this.length = rectSize;
 		this.input;
+		this.selected = false;
 	}
 
 	render(offsetX, offsetY) {
 		//fill(200);
 		//rect(this.posX + offsetX, this.posY + offsetY, this.WIDTH, this.HEIGHT);
+		strokeWeight(0);
+
+		if (this.selected) {
+			strokeWeight(1);
+		} else {
+			fill(225);
+			rect(this.posX + offsetX, this.posY + offsetY, this.WIDTH, this.HEIGHT);	
+		}
+
 		fill(this.hex);
 		rect(this.posX + offsetX, this.posY + offsetY, this.length, this.length);
+
 		fill(0);
 		textAlign(LEFT, TOP);
 		text(this.msg, this.posX + offsetX + (this.length * 1.5), this.posY + offsetY);

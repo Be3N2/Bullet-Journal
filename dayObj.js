@@ -17,11 +17,15 @@ class dayObj {
 	}
 
 	draw(offsetX, offsetY) {
+		
+		fill(this.fillColorx, this.fillcolorY, this.fillcolorZ);
+		
 		if (!this.selected) {
-			fill(this.fillColorx, this.fillcolorY, this.fillcolorZ);
+			strokeWeight(.5);
 		} else {
-			fill(255, 0, 255);
+			strokeWeight(2);
 		}
+
 		rect(this.x + offsetX, this.y + offsetY, this.width, this.width);
 	}
 }
