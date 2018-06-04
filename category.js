@@ -36,8 +36,4 @@ class category {
 		//input.position(100, 100);
 
 	}
-
-	mouseAction() {
-		
-	}
 }

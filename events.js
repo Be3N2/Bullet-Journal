@@ -9,11 +9,7 @@ class events {
 		this.categories = [];
 		this.length = rectSize;
 		this.gap = 2.5 * rectSize;
-		this.selectedNum = 0;
-	}
-
-	update() {
-
+		this.selectedNum = 0; //selected category id
 	}
 
 	render() {
@@ -49,13 +45,25 @@ class events {
 			if ((mouseX > positionX && mouseX <= positionX + this.categories[catNum].WIDTH) && 
 				(mouseY > positionY && mouseY <= positionY + this.categories[catNum].HEIGHT)) {
 				this.categories[catNum].selected = true;
-				this.selectedNum = catNum;
+				this.setSelectedId(catNum);
 				triggered = true;
 			} else {
 				this.categories[catNum].selected = false;
 			}
 		}
 		if (triggered) this.render();
+	}
+
+	getSelectedId() {		
+		selected;
+	}
+
+	setSelectedId(catNum) {
+		for (let props in this.datas) {
+			if (this.datas[props] == catNum) {
+				selected = this.datas[props].id;
+			}
+		}
 	}
 
 	resize(posX, posY) {

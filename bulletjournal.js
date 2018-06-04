@@ -18,11 +18,16 @@ var eventKey = {
 	"1": {"id": 1, "data": {"name": "Angry, frustrated", "color": "#bd0c0c"}},
 	"2": {"id": 2, "data": {"name": "Average, normal, uneventful", "color": "#ca4a26"}},
 	"3": {"id": 3, "data": {"name": "Productive", "color": "#fff23a"}},
-  "4": {"id": 2, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
-  "5": {"id": 2, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
-  "6": {"id": 2, "data": {"name": "Disappointed", "color": "#3022fe"}},
-  "7": {"id": 2, "data": {"name": "Happy", "color": "#ff3af2"}},
+	"4": {"id": 4, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
+	"5": {"id": 5, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
+	"6": {"id": 6, "data": {"name": "Disappointed", "color": "#3022fe"}},
+	"7": {"id": 7, "data": {"name": "Happy", "color": "#ff3af2"}},
 };
+
+var saveObj = {
+	"days": {},
+	"events": {}
+}
 
 var canvas;
 var calendar;
@@ -60,14 +65,22 @@ function setup() {
 }
 
 function draw() {
- 
+
 }
 
 function mouseClicked() {
 	//console.log(mouseX + "  |  " + mouseY);
+	
 	calendar.mouseAction(mouseX, mouseY);
-  eventsObj.mouseAction(mouseX, mouseY);
+	eventsObj.mouseAction(mouseX, mouseY);
+	console.log("single");
 }
+
+function doubleClicked() {
+	let id = eventsObj.getSelectedId();
+	console.log(mouseX + " | " + mouseY);
+}
+
 window.onresize = function() {
   var w = window.innerWidth;
   var h = window.innerHeight;  

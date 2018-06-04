@@ -8,9 +8,7 @@ class dayObj {
 		this.y = inY;
 		this.width = width;
 		
-		this.fillColorx = 10;
-		this.fillcolorY = 180;
-		this.fillcolorZ = 180;
+		this.fillColor = "#0AB4B4";
 
 		this.selected = false;
 
@@ -18,7 +16,7 @@ class dayObj {
 
 	draw(offsetX, offsetY) {
 		
-		fill(this.fillColorx, this.fillcolorY, this.fillcolorZ);
+		fill(this.fillColor);
 		
 		if (!this.selected) {
 			strokeWeight(.5);

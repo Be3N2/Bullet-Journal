@@ -8,6 +8,8 @@ class calendarObj {
 		this.length = width / 12;
 		this.offsetX = offX;
 		this.offsetY = offY;
+
+		this.selectedIndex = 0;
 	}
 
 	createDays() {
@@ -90,6 +92,7 @@ class calendarObj {
 							for (let dayObject in this.days) {
 								if (this.days[dayObject].monthNum == x + 1 && this.days[dayObject].number == y + 1) {
 									this.days[dayObject].selected = true;
+									this.selectedIndex = dayObject;
 								} else {
 									this.days[dayObject].selected = false;
 								}
