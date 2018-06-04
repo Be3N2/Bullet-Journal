@@ -10,9 +10,14 @@ class events {
 		this.length = rectSize;
 		this.gap = 2.5 * rectSize;
 		this.selectedNum = 0; //selected category id
+		this.button;
+		this.buttonX = 50;
+		this.buttonY;
 	}
 
 	render() {
+		//this.addEventButton();
+
 		strokeWeight(0);
 		fill(255);
 		rect(this.offsetX, this.offsetY, this.WIDTH, this.HEIGHT);
@@ -31,6 +36,7 @@ class events {
 			
 			let posX = 50;
 			let posY = 50 + (this.gap * (eventNumber - 1));
+			this.buttonY = posY + this.gap;
 
 			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, data.name, data.color, this.length));
 		}
@@ -55,13 +61,13 @@ class events {
 	}
 
 	getSelectedId() {		
-		selected;
+		this.selected;
 	}
 
 	setSelectedId(catNum) {
 		for (let props in this.datas) {
 			if (this.datas[props] == catNum) {
-				selected = this.datas[props].id;
+				this.selected = this.datas[props].id;
 			}
 		}
 	}
@@ -69,6 +75,12 @@ class events {
 	resize(posX, posY) {
 		this.offsetX = posX;
 		this.offsetY = posY;
+	}
+
+	addEventButton(func) {
+		this.button = createButton('Add Event');
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
+		this.button.mousePressed(func);
 	}
 
 }

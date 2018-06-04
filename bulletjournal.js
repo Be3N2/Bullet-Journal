@@ -50,8 +50,8 @@ function setup() {
   let eventsposX = window.innerWidth / 2;
   let eventsposY = calpositionY;
 
-  eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY, rectSize);
-  
+  eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY, rectSize, addEvent);
+
   headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
   background(255);
   
@@ -59,6 +59,8 @@ function setup() {
 
   calendar.render();
   eventsObj.createCategories();
+  eventsObj.addEventButton(addEvent);
+  
   eventsObj.render();
   headerObj.render();
 
@@ -73,12 +75,11 @@ function mouseClicked() {
 	
 	calendar.mouseAction(mouseX, mouseY);
 	eventsObj.mouseAction(mouseX, mouseY);
-	console.log("single");
+
 }
 
 function doubleClicked() {
 	let id = eventsObj.getSelectedId();
-	console.log(mouseX + " | " + mouseY);
 }
 
 window.onresize = function() {
@@ -97,3 +98,7 @@ window.onresize = function() {
   headerObj.resize(window.innerWidth, window.innerHeight);
   headerObj.render();
 };
+
+function addEvent() {
+	console.log("CLICKED");
+}

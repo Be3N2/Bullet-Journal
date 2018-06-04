@@ -19,11 +19,12 @@ class category {
 		strokeWeight(0);
 
 		if (this.selected) {
-			strokeWeight(1);
-		} else {
+			
 			fill(225);
 			rect(this.posX + offsetX, this.posY + offsetY, this.WIDTH, this.HEIGHT);	
-		}
+			strokeWeight(1);
+
+		} 
 
 		fill(this.hex);
 		rect(this.posX + offsetX, this.posY + offsetY, this.length, this.length);
