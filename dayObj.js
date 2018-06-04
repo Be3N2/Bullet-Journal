@@ -8,8 +8,9 @@ class dayObj {
 		this.y = inY;
 		this.width = width;
 		
-		this.fillColor = "#0AB4B4";
-
+		//this.fillColor = "#0AB4B4";
+		this.fillColor = "#ADD8E6";
+		
 		this.selected = false;
 
 	}

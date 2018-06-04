@@ -60,21 +60,25 @@ class events {
 		if (triggered) this.render();
 	}
 
-	getSelectedId() {		
-		this.selected;
+	getSelectedData() {
+		for (let props in this.datas) {
+			if (this.datas[props].id == this.selectedNum) {
+				console.log(this.datas[props].data);
+				return this.datas[props].data;
+			}
+		}
 	}
 
 	setSelectedId(catNum) {
-		for (let props in this.datas) {
-			if (this.datas[props] == catNum) {
-				this.selected = this.datas[props].id;
-			}
-		}
+		console.log(catNum);
+		let innerData = this.datas[catNum];
+		this.selectedNum = innerData.id;
 	}
 
 	resize(posX, posY) {
 		this.offsetX = posX;
 		this.offsetY = posY;
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
 	}
 
 	addEventButton(func) {

@@ -15,13 +15,13 @@ var data = {
 };
 
 var eventKey = {
-	"1": {"id": 1, "data": {"name": "Angry, frustrated", "color": "#bd0c0c"}},
-	"2": {"id": 2, "data": {"name": "Average, normal, uneventful", "color": "#ca4a26"}},
-	"3": {"id": 3, "data": {"name": "Productive", "color": "#fff23a"}},
-	"4": {"id": 4, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
-	"5": {"id": 5, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
-	"6": {"id": 6, "data": {"name": "Disappointed", "color": "#3022fe"}},
-	"7": {"id": 7, "data": {"name": "Happy", "color": "#ff3af2"}},
+	"0": {"id": 1, "data": {"name": "Angry, frustrated", "color": "#B21700"}},
+	"1": {"id": 2, "data": {"name": "Average, normal, uneventful", "color": "#ca4a26"}},
+	"2": {"id": 3, "data": {"name": "Productive", "color": "#fff23a"}},
+	"3": {"id": 4, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
+	"4": {"id": 5, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
+	"5": {"id": 6, "data": {"name": "Disappointed", "color": "#3022fe"}},
+	"6": {"id": 7, "data": {"name": "Happy", "color": "#ff3af2"}},
 };
 
 var saveObj = {
@@ -60,7 +60,7 @@ function setup() {
   calendar.render();
   eventsObj.createCategories();
   eventsObj.addEventButton(addEvent);
-  
+
   eventsObj.render();
   headerObj.render();
 
@@ -100,5 +100,12 @@ window.onresize = function() {
 };
 
 function addEvent() {
-	console.log("CLICKED");
+	let selectedNum = calendar.selectedIndex;
+	let eventData = eventsObj.getSelectedData();
+
+	if (eventData) {
+		let col = eventData.color;
+		calendar.addEvent(eventData.color);	
+	} 
+	
 }
