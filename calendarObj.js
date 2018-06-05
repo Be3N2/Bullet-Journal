@@ -90,7 +90,7 @@ class calendarObj {
 					if (mouseX > 0 + x * this.length && mouseX <= this.length + x * this.length) {
 						if (mouseY > 0 + y * this.length && mouseY <= this.length + y * this.length) {
 							for (let dayObject in this.days) {
-								if (this.days[dayObject].monthNum == x + 1 && this.days[dayObject].number == y + 1) {
+								if (this.days[dayObject].monthNum == x && this.days[dayObject].number == y + 1) {
 									this.days[dayObject].selected = true;
 									this.selectedIndex = dayObject;
 								} else {
