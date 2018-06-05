@@ -27,19 +27,22 @@ class events {
 	}
 
 	createCategories() {
-		let eventNumber = 0;
+		
 		for (let prop in this.datas) {
-			eventNumber++;
+			
 			let object = this.datas[prop];
-			let data = object.data;
-			let nameWidth = textWidth(data.name);
+			
+			let nameWidth = textWidth(object.name);
 			
 			let posX = 50;
-			let posY = 50 + (this.gap * (eventNumber - 1));
+			let posY = 50 + (this.gap * (prop - 1));
 			this.buttonY = posY + this.gap;
 
-			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, data.name, data.color, this.length));
+			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, object.name, object.color, this.length));
+			
 		}
+
+
 	}
 
 	mouseAction(mouseX, mouseY) {
@@ -63,14 +66,12 @@ class events {
 	getSelectedData() {
 		for (let props in this.datas) {
 			if (this.datas[props].id == this.selectedNum) {
-				console.log(this.datas[props].data);
-				return this.datas[props].data;
+				return this.datas[props];
 			}
 		}
 	}
 
 	setSelectedId(catNum) {
-		console.log(catNum);
 		let innerData = this.datas[catNum];
 		this.selectedNum = innerData.id;
 	}

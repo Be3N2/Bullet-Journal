@@ -13,14 +13,14 @@ class calendarObj {
 	}
 
 	createDays() {
-		let monthNum = 0;
+		
 		for (let prop in this.datas) {
-			monthNum++;
+
 			let obj = this.datas[prop];
 			for (let i = 0; i < obj.days; i++) {
-				let posX = (prop - 1) * this.length;
+				let posX = (prop) * this.length;
 				let posY = i * this.length;
-				this.days.push(new dayObj(obj.name, monthNum, i + 1, posX, posY, this.length));
+				this.days.push(new dayObj(obj.name, prop, i + 1, posX, posY, this.length));
 			}
 		}
 	}

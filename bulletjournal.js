@@ -1,28 +1,28 @@
 
-var data = {
-	"1": {"name": "J", "days": 31},
-	"2": {"name": "F", "days": 28},
-	"3": {"name": "M", "days": 31},
-	"4": {"name": "A", "days": 30},
-	"5": {"name": "M", "days": 31},
-	"6": {"name": "J", "days": 30},
-	"7": {"name": "J", "days": 31},
-	"8": {"name": "A", "days": 31},
-	"9": {"name": "S", "days": 30},
-	"10": {"name": "O", "days": 31},
-	"11": {"name": "N", "days": 30},
-	"12": {"name": "D", "days": 31}
-};
+var data = [
+	{"name": "J", "days": 31},
+	{"name": "F", "days": 28},
+	{"name": "M", "days": 31},
+	{"name": "A", "days": 30},
+	{"name": "M", "days": 31},
+	{"name": "J", "days": 30},
+	{"name": "J", "days": 31},
+	{"name": "A", "days": 31},
+	{"name": "S", "days": 30},
+	{"name": "O", "days": 31},
+	{"name": "N", "days": 30},
+	{"name": "D", "days": 31}
+];
 
-var eventKey = {
-	"0": {"id": 1, "data": {"name": "Angry, frustrated", "color": "#B21700"}},
-	"1": {"id": 2, "data": {"name": "Average, normal, uneventful", "color": "#ca4a26"}},
-	"2": {"id": 3, "data": {"name": "Productive", "color": "#fff23a"}},
-	"3": {"id": 4, "data": {"name": "Sick, tired, lazy", "color": "#00ac18"}},
-	"4": {"id": 5, "data": {"name": "Sad, lonely", "color": "#22c5fe"}},
-	"5": {"id": 6, "data": {"name": "Disappointed", "color": "#3022fe"}},
-	"6": {"id": 7, "data": {"name": "Happy", "color": "#ff3af2"}},
-};
+var eventKey = [
+	{"id": 1, "name": "Angry, frustrated", "color": "#B21700"},
+	{"id": 2, "name": "Average, normal, uneventful", "color": "#ca4a26"},
+	{"id": 3, "name": "Productive", "color": "#fff23a"},
+	{"id": 4, "name": "Sick, tired, lazy", "color": "#00ac18"},
+	{"id": 5, "name": "Sad, lonely", "color": "#22c5fe"},
+	{"id": 6, "name": "Disappointed", "color": "#3022fe"},
+	{"id": 7, "name": "Happy", "color": "#ff3af2"},
+];
 
 var saveObj = {
 	"days": {},
