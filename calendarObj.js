@@ -114,4 +114,8 @@ class calendarObj {
 		this.days[this.selectedIndex].fillColor = fillCol;
 		this.days[this.selectedIndex].draw();
 	}
+
+	saveDays() {
+		
+	}
 }

@@ -109,3 +109,9 @@ function addEvent() {
 	} 
 	
 }
+
+function save() {
+	saveObj.events = eventKey;
+	calendar.saveDays(saveObj);
+	console.log(saveObj);
+}

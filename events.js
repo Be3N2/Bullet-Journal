@@ -35,7 +35,7 @@ class events {
 			let nameWidth = textWidth(object.name);
 			
 			let posX = 50;
-			let posY = 50 + (this.gap * (prop - 1));
+			let posY = 50 + (this.gap * prop);
 			this.buttonY = posY + this.gap;
 
 			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, object.name, object.color, this.length));
