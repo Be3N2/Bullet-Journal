@@ -1,0 +1,27 @@
+{
+  "name": "bulletjournal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.5",
+    "mongodb": "*"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Be3N2/Bullet-Journal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Be3N2/Bullet-Journal/issues"
+  },
+  "homepage": "https://github.com/Be3N2/Bullet-Journal#readme"
+}

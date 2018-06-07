@@ -25,8 +25,8 @@ var eventKey = [
 ];
 
 var saveObj = {
-	"days": {},
-	"events": {}
+	"days": [],
+	"events": []
 }
 
 var canvas;
@@ -78,10 +78,6 @@ function mouseClicked() {
 
 }
 
-function doubleClicked() {
-	let id = eventsObj.getSelectedId();
-}
-
 window.onresize = function() {
   var w = window.innerWidth;
   var h = window.innerHeight;  
@@ -105,13 +101,14 @@ function addEvent() {
 
 	if (eventData) {
 		let col = eventData.color;
-		calendar.addEvent(eventData.color);	
+		calendar.addEvent(eventData.id, eventData.color, "");	
 	} 
 	
+	saveData();
 }
 
-function save() {
+function saveData() {
 	saveObj.events = eventKey;
-	calendar.saveDays(saveObj);
+	saveObj.days = calendar.getDayData();
 	console.log(saveObj);
 }

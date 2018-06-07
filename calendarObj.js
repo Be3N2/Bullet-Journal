@@ -3,6 +3,7 @@ class calendarObj {
 	constructor (width, height, datas2, offX, offY) {
 		this.datas = datas2;
 		this.days = [];
+		this.eventData = [];
 		this.WIDTH = width;
 		this.HEIGHT = height;
 		this.length = width / 12;
@@ -110,12 +111,14 @@ class calendarObj {
 		this.offsetY = yOffset;
 	}
 	
-	addEvent(fillCol) {
+	addEvent(id, fillCol, details) {
+		let eventObj = {"day": this.selectedIndex, "id": id, "color": fillCol, "details": details};
+		this.eventData.push(eventObj);
 		this.days[this.selectedIndex].fillColor = fillCol;
 		this.days[this.selectedIndex].draw();
 	}
 
-	saveDays() {
-		
+	getDayData() {
+		return this.eventData;
 	}
 }
