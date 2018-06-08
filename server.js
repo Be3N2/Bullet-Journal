@@ -15,7 +15,8 @@ app.use(express.static('public'));
 
 app.get("/", function (request, response) {
 	//if (startup) connect();
-	response.sendFile('/views/index.html');
+	console.log(__dirname);
+	response.sendFile(__dirname + "/" + 'index.html');
 });
 
 //app.get("/save", fetch);
