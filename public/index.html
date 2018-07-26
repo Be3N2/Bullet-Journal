@@ -2,20 +2,30 @@
 <head>
   <meta charset="UTF-8">
 
-  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
-  <script language="javascript" type="text/javascript" src="js/dayObj.js"></script>
-  <script language="javascript" type="text/javascript" src="js/calendarObj.js"></script>
-  <script language="javascript" type="text/javascript" src="js/header.js"></script>
-  <script language="javascript" type="text/javascript" src="js/events.js"></script>
-  <script language="javascript" type="text/javascript" src="js/category.js"></script>
-  <script language="javascript" type="text/javascript" src="js/bulletjournal.js"></script>
-  <link rel='stylesheet prefetch' href='css/index.css'>
+  <script type="text/javascript" src="common/ajax-functions.js"></script>
+  <script type="text/javascript" src="controllers/clickController.client.js"></script>
+  
+  <script language="javascript" type="text/javascript" src="/public/libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/libraries/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/dayObj.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/calendarObj.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/header.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/events.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/category.js"></script>
+  <script language="javascript" type="text/javascript" src="/public/js/bulletjournal.js"></script>
+  <link rel='stylesheet prefetch' href='/public/css/index.css'>
 
   <!-- This line removes any default padding and style. 
        You might only need one of these values set. -->
   <style> body {padding: 0; margin: 0;} </style>
 </head>
+
+<header>
+  <p>Welcome, <span id="display-name"></span>!</p>
+  <a class="menu" href="/profile">Profile</a>
+  <p>|</p>
+  <a class="menu" href="/logout">Logout</a>
+</header>
 
 <body>
 

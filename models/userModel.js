@@ -9,7 +9,7 @@ var userSchema = new Schema({
 		id: String,
 		displayName: String,
 		username: String,
-      publicRepos: Number
+      	publicRepos: Number
 	},
    appData: {
       year: Array
