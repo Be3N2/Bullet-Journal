@@ -3,7 +3,9 @@ var app = express();
 
 var mongoose = require('mongoose');
 
-var User = require('./models/model');
+var User = require('./models/userModel');
+
+require('dotenv').config();
 
 mongoose.connect('mongodb://be3n2:learnmongoPass1@ds117615.mlab.com:17615/learningmongo', { keepAlive: true, keepAliveInitialDelay: 300000 }, function(err) {
 	if (err) {
