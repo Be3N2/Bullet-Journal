@@ -11,65 +11,63 @@ mongoose.connect('mongodb://be3n2:learnmongoPass1@ds117615.mlab.com:17615/learni
 	} else {
 		console.log('MongoDB successfully connected.');
 	}
+});
 
-	var COLLECTION = "bulletjournal";
-	var PORT = 3000;
+var COLLECTION = "bulletjournal";
+var PORT = 3000;
 
-	app.use(express.static('public'));
+app.use(express.static('public'));
 
-	app.get("/", function (request, response) {
-		response.sendFile(__dirname + "/" + 'index.html');
+app.get("/", function (request, response) {
+	response.sendFile(__dirname + "/" + 'index.html');
+});
+
+app.get("/save", saveData);
+
+app.get("/find", find);
+
+function find(request, response) {
+	
+
+	User.find(function(err, res) {
+		if (err) {
+			response.send("Error");
+			return;
+		}
+		response.send(res);
+	});
+	
+}
+
+function saveData(request, response) {
+
+	let chris = new User({
+	  name: 'Chris',
+	  username: 'sevilayha',
+	  password: 'password' 
 	});
 
-	app.get("/save", saveData);
+	chris.save(function(err) {
+	  if (err && err.code !== 11000) {
+	  	console.log(err);
+	    console.log(err.code);
+	    response.send('Not a Duplicate User Error');
+	    return;
+	  }  
+	  if (err && err.code === 11000) {
+	  	//duplicate user error code
+	  	response.send("Duplicate User");
+	  	return;
+	  }
 
-	app.get("/find", find);
-
-	function find(request, response) {
-		
-
-		User.find(function(err, res) {
-			if (err) {
-				response.send("Error");
-				return;
-			}
-			response.send(res);
-		});
-		
-	}
-
-	function saveData(request, response) {
-
-		let chris = new User({
-		  name: 'Chris',
-		  username: 'sevilayha',
-		  password: 'password' 
-		});
-
-		chris.save(function(err) {
-		  if (err && err.code !== 11000) {
-		  	console.log(err);
-		    console.log(err.code);
-		    response.send('Not a Duplicate User Error');
-		    return;
-		  }  
-		  if (err && err.code === 11000) {
-		  	//duplicate user error code
-		  	response.send("Duplicate User");
-		  	return;
-		  }
-
-		  console.log('User saved successfully!');
-		  response.send("User saved successfully!");
-		});
-
-		
-	}
-
-	// open port with a callback
-	var listener = app.listen(PORT, function () {
-	  console.log('Your app is listening on port ' + listener.address().port);
+	  console.log('User saved successfully!');
+	  response.send("User saved successfully!");
 	});
 
+	
+}
 
+// open port with a callback
+var listener = app.listen(PORT, function () {
+  console.log('Your app is listening on port ' + listener.address().port);
 });
