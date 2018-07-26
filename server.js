@@ -1,75 +1,32 @@
 var express = require('express');
-var app = express();
-
+var routes = require('./routes/index.js');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
 
-var User = require('./models/userModel');
+var app = express();
+require('dotenv').load();
+//require('dotenv').config();
+require('./config/passport')(passport);
 
-require('dotenv').config();
+mongoose.connect(process.env.MONGO_URI);
 
-mongoose.connect('mongodb://be3n2:learnmongoPass1@ds117615.mlab.com:17615/learningmongo', { keepAlive: true, keepAliveInitialDelay: 300000 }, function(err) {
-	if (err) {
-		throw new Error('Database failed to connect!');
-	} else {
-		console.log('MongoDB successfully connected.');
-	}
-});
+app.use('/controllers', express.static(process.cwd() + '/controllers'));
+app.use('/public', express.static(process.cwd() + '/public'));
 
-var COLLECTION = "bulletjournal";
-var PORT = 3000;
+app.use(session({
+	secret: 'beenSweetToME',
+	resave: false,
+	saveUninitialized: true
+}));
 
-app.use(express.static('public'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/", function (request, response) {
-	response.sendFile(__dirname + "/" + 'index.html');
-});
+routes(app, passport);
 
-app.get("/save", saveData);
+var port = process.env.PORT || 3000;
 
-app.get("/find", find);
-
-function find(request, response) {
-	
-
-	User.find(function(err, res) {
-		if (err) {
-			response.send("Error");
-			return;
-		}
-		response.send(res);
-	});
-	
-}
-
-function saveData(request, response) {
-
-	let chris = new User({
-	  name: 'Chris',
-	  username: 'sevilayha',
-	  password: 'password' 
-	});
-
-	chris.save(function(err) {
-	  if (err && err.code !== 11000) {
-	  	console.log(err);
-	    console.log(err.code);
-	    response.send('Not a Duplicate User Error');
-	    return;
-	  }  
-	  if (err && err.code === 11000) {
-	  	//duplicate user error code
-	  	response.send("Duplicate User");
-	  	return;
-	  }
-
-	  console.log('User saved successfully!');
-	  response.send("User saved successfully!");
-	});
-
-	
-}
-
-// open port with a callback
-var listener = app.listen(PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+app.listen(port, function() {
+	console.log('Node.js listening on port ' + port + '...');
 });
