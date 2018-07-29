@@ -6,7 +6,7 @@ var apiUrl = appUrl + '/api:id/yearData';
 //var dataDisplay = document.querySelector('.datadisplay');
 
 function updateData (data) {
-	console.log(dataObj);
+	if (dataObj) console.log(dataObj);
 	if (data) 
 		dataObj = JSON.parse(data);
 	console.log(dataObj);

@@ -29,7 +29,8 @@ var saveObj = {
 	"events": []
 }
 
-var dataObj = {"test": 1};
+var dataObj;
+var loaded = false;
 
 var canvas;
 var calendar;
@@ -46,13 +47,13 @@ function setup() {
 	let calpositionX = window.innerWidth / 2 - window.innerWidth / 5;
 	let calpositionY = window.innerHeight / 5;
 
-	calendar = new calendarObj(12 * 25,12 * 25 * 3,yearStructure,calpositionX,calpositionY);
+	calendar = new calendarObj(12 * rectSize,12 * rectSize * 3,yearStructure,calpositionX,calpositionY);
 
 	//let eventsposX = (window.innerWidth / 2) + ((window.innerWidth/ 5) - (12 * 25));
 	let eventsposX = window.innerWidth / 2;
 	let eventsposY = calpositionY;
 
-	eventsObj = new events(window.innerWidth / 3, 12 * 25 * 3, eventKey, eventsposX, eventsposY, rectSize, addEvent);
+	eventsObj = new events(window.innerWidth / 3, 12 * rectSize * 2, eventsposX, eventsposY, rectSize, addEvent);
 
 	headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
 	background(255);
@@ -60,8 +61,6 @@ function setup() {
 	calendar.createDays();
 
 	calendar.render();
-	eventsObj.createCategories();
-	eventsObj.addEventButton(addEvent);
 
 	eventsObj.render();
 	headerObj.render();
@@ -70,6 +69,13 @@ function setup() {
 
 function draw() {
 
+	//wait for data load
+	if (!loaded && dataObj) {
+		calendar.loadData(dataObj);
+		eventsObj.loadData(dataObj.events);
+		eventsObj.addEventButton(addEvent);
+		loaded = true;
+	}
 }
 
 function mouseClicked() {
@@ -98,11 +104,9 @@ window.onresize = function() {
 };
 
 function addEvent() {
-	let selectedNum = calendar.selectedIndex;
 	let eventData = eventsObj.getSelectedData();
 
 	if (eventData) {
-		
 		calendar.addEvent(eventData.id, eventData.color, "");	
 	} 
 	

@@ -1,11 +1,11 @@
 class events {
 	
-	constructor(width, height, datas3, offX, offY, rectSize) {
+	constructor(width, height, offX, offY, rectSize) {
 		this.WIDTH = width;
 		this.HEIGHT = height;
-		this.datas = datas3;
 		this.offsetX = offX;
 		this.offsetY = offY;
+		this.eventKey = [];
 		this.categories = [];
 		this.length = rectSize;
 		this.gap = 2.5 * rectSize;
@@ -16,7 +16,6 @@ class events {
 	}
 
 	render() {
-		//this.addEventButton();
 
 		strokeWeight(0);
 		fill(255);
@@ -24,24 +23,28 @@ class events {
 		for (let categoryObj in this.categories) {
 			this.categories[categoryObj].render(this.offsetX, this.offsetY);
 		}
+
 	}
 
-	createCategories() {
+	loadData(data) {
 		
-		for (let prop in this.datas) {
+		this.eventKey = data;
+
+		for (let index in this.eventKey) {
 			
-			let object = this.datas[prop];
+			let object = this.eventKey[index];
 			
 			let nameWidth = textWidth(object.name);
 			
 			let posX = 50;
-			let posY = 50 + (this.gap * prop);
+			let posY = 50 + (this.gap * index);
 			this.buttonY = posY + this.gap;
 
 			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, object.name, object.color, this.length));
 			
 		}
 
+		this.render();
 
 	}
 
@@ -64,28 +67,27 @@ class events {
 	}
 
 	getSelectedData() {
-		for (let props in this.datas) {
-			if (this.datas[props].id == this.selectedNum) {
-				return this.datas[props];
+		for (let props in this.eventKey) {
+			if (this.eventKey[props].id == this.selectedNum) {
+				return this.eventKey[props];
 			}
 		}
 	}
 
 	setSelectedId(catNum) {
-		let innerData = this.datas[catNum];
+		let innerData = this.eventKey[catNum];
 		this.selectedNum = innerData.id;
 	}
 
 	resize(posX, posY) {
 		this.offsetX = posX;
 		this.offsetY = posY;
-		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
 	}
 
 	addEventButton(func) {
 		this.button = createButton('Add Event');
-		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
 		this.button.mousePressed(func);
 	}
-
 }

@@ -122,4 +122,21 @@ class calendarObj {
 	getDayData() {
 		return this.eventData;
 	}
+
+	loadData(data) { 
+		this.eventData = data.days;
+		let eventKey = data.events;
+
+		//draw out all the days with new data
+		for (let i = 0; i < this.eventData.length; i++) {
+			for (let j = 0; j < eventKey.length; j++) {
+				if (eventKey[j].id == this.eventData[i].event_id) {
+					this.days[this.eventData[i].day].fillColor = eventKey[j].color;
+					this.days[this.eventData[i].day].draw();
+				}
+			}
+		}
+
+		this.render();
+	}
 }

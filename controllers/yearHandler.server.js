@@ -19,9 +19,7 @@ function yearHandler() {
 			.exec(function (err, result) {
 				if (err) throw err; 
 				
-				console.log(result);
-				result.appData.days.push(request.body);
-				console.log("=================");
+				result.appData = request.body;
 				console.log(request.body);
 				result.save(function(err) {
 					if (err) throw err;
