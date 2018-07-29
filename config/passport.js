@@ -34,8 +34,10 @@ module.exports = function (passport) {
 					newUser.github.username = profile.username;
 					newUser.github.displayName = profile.displayName;
 					newUser.github.publicRepos = profile._json.public_repos;
-					
+
 					//add Year setup data here!
+					newUser.appData.days = [];
+					newUser.appData.events = [{"id": 7, "name": "Happy", "color": "#ff3af2"}];
 
 					newUser.save(function (err) {
 						if (err) {

@@ -12,7 +12,8 @@ var userSchema = new Schema({
       	publicRepos: Number
 	},
    appData: {
-      year: Array
+      days: Array,
+      events: Array
    }
 }, { collection: 'bulletjournal' });
 

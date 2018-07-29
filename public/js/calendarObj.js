@@ -1,7 +1,7 @@
 class calendarObj {
 
-	constructor (width, height, datas2, offX, offY) {
-		this.datas = datas2;
+	constructor (width, height, yearStruct, offX, offY) {
+		this.setupStruct = yearStruct;
 		this.days = [];
 		this.eventData = [];
 		this.WIDTH = width;
@@ -15,13 +15,13 @@ class calendarObj {
 
 	createDays() {
 		
-		for (let prop in this.datas) {
+		for (let index in this.setupStruct) {
 
-			let obj = this.datas[prop];
+			let obj = this.setupStruct[index];
 			for (let i = 0; i < obj.days; i++) {
-				let posX = (prop) * this.length;
+				let posX = (index) * this.length;
 				let posY = i * this.length;
-				this.days.push(new dayObj(obj.name, prop, i + 1, posX, posY, this.length));
+				this.days.push(new dayObj(obj.name, index, i + 1, posX, posY, this.length));
 			}
 		}
 	}
@@ -58,9 +58,9 @@ class calendarObj {
 		textSize(18);
 		textAlign(LEFT, TOP);
 
-		for (let prop in this.datas) {
+		for (let prop in this.setupStruct) {
 			monthNum++;
-			let obj = this.datas[prop];
+			let obj = this.setupStruct[prop];
 			
 			let posX = this.offsetX;
 			posX += (monthNum - 1) * this.length;
@@ -90,12 +90,12 @@ class calendarObj {
 				for (let x = 0; x < 12; x++) {
 					if (mouseX > 0 + x * this.length && mouseX <= this.length + x * this.length) {
 						if (mouseY > 0 + y * this.length && mouseY <= this.length + y * this.length) {
-							for (let dayObject in this.days) {
-								if (this.days[dayObject].monthNum == x && this.days[dayObject].number == y + 1) {
-									this.days[dayObject].selected = true;
-									this.selectedIndex = dayObject;
+							for (let index in this.days) {
+								if (this.days[index].monthNum == x && this.days[index].number == y + 1) {
+									this.days[index].selected = true;
+									this.selectedIndex = index;
 								} else {
-									this.days[dayObject].selected = false;
+									this.days[index].selected = false;
 								}
 							}
 						}
@@ -111,9 +111,10 @@ class calendarObj {
 		this.offsetY = yOffset;
 	}
 	
-	addEvent(id, fillCol, details) {
-		let eventObj = {"day": this.selectedIndex, "id": id, "color": fillCol, "details": details};
+	addEvent(event_id, fillCol, details) {
+		let eventObj = {"day": Number(this.selectedIndex), "event_id": event_id, "details": details};
 		this.eventData.push(eventObj);
+
 		this.days[this.selectedIndex].fillColor = fillCol;
 		this.days[this.selectedIndex].draw();
 	}

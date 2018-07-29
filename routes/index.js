@@ -50,7 +50,8 @@ module.exports = function (app, passport) {
 	}));
 
 	app.route('/api:id/yearData')
-		.get(isLoggedIn, yearHandler.getAppData);
+		.get(isLoggedIn, yearHandler.getAppData)
+		.post(isLoggedIn, yearHandler.saveAppData);
 	//post and delete as well
 	//reference http://www.clementinejs.com/tutorials/tutorial-passport.html#AuthorizationConfiguration
 
