@@ -21,7 +21,7 @@ class bargraph {
 		//Clear bargraph area
 		strokeWeight(0);
 		stroke(200);
-		rect(this.offsetX, this.offsetY, this.offsetX + this.WIDTH, this.offsetY + this.HEIGHT);
+		rect(this.offsetX, this.offsetY, this.WIDTH, this.HEIGHT);
 
 		let initialOff = this.WIDTH / 8;
 
@@ -29,9 +29,10 @@ class bargraph {
 			//scale barHeight from 0 - 0.9 of this.HEIGHT
 			let barHeight = (eventData[i].number / this.max) * (this.HEIGHT * 0.9);
 			let startY = this.offsetY + this.HEIGHT - barHeight;			
-			rect(this.offsetX + initialOff, startY, this.offsetX + this.barwidth, this.offsetY + this.HEIGHT);
+			rect(this.offsetX + initialOff, startY, this.barwidth, barHeight);
 			
 		}
+
 	}
 
 	loadData(eventData) {
@@ -47,7 +48,8 @@ class bargraph {
 		render();
 	}
 
-	resize() {
-
+	resize(xOffset, yOffset) {
+		this.offsetX = xOffset;
+		this.offsetY = yOffset;
 	}
 }
