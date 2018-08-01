@@ -33,7 +33,8 @@ var dataObj;
 var loaded = false;
 
 var canvas;
-var calendar;
+
+var calendarObj;
 
 var eventsObj;
 
@@ -44,24 +45,31 @@ var rectSize = 25;
 function setup() {
 	canvas = createCanvas(window.innerWidth, window.innerHeight);
 
+
+	//CALENDAR
 	let calpositionX = window.innerWidth / 2 - window.innerWidth / 5;
 	let calpositionY = window.innerHeight / 5;
 
-	calendar = new calendarObj(12 * rectSize,12 * rectSize * 3,yearStructure,calpositionX,calpositionY);
+	calendarObj = new calendar(12 * rectSize,12 * rectSize * 3,yearStructure,calpositionX,calpositionY);
+	calendarObj.createDays();
 
+	//EVENTS
 	//let eventsposX = (window.innerWidth / 2) + ((window.innerWidth/ 5) - (12 * 25));
 	let eventsposX = window.innerWidth / 2;
 	let eventsposY = calpositionY;
 
 	eventsObj = new events(window.innerWidth / 3, 12 * rectSize * 2, eventsposX, eventsposY, rectSize, addEvent);
 
+	//HEADER
 	headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
+	
+
+	//INITIAL RENDER
+
 	background(255);
 
-	calendar.createDays();
-
-	calendar.render();
-
+	//RENDER MAIN PAGE
+	calendarObj.render();
 	eventsObj.render();
 	headerObj.render();
 
@@ -71,7 +79,7 @@ function draw() {
 
 	//wait for data load
 	if (!loaded && dataObj) {
-		calendar.loadData(dataObj);
+		calendarObj.loadData(dataObj);
 		eventsObj.loadData(dataObj.events);
 		eventsObj.addEventButton(addEvent);
 		loaded = true;
@@ -81,7 +89,8 @@ function draw() {
 function mouseClicked() {
 	//console.log(mouseX + "  |  " + mouseY);
 	
-	calendar.mouseAction(mouseX, mouseY);
+	//MAIN PAGE MOUSE UPDATE
+	calendarObj.mouseAction(mouseX, mouseY);
 	eventsObj.mouseAction(mouseX, mouseY);
 
 }
@@ -93,8 +102,9 @@ window.onresize = function() {
 	width = w;
 	height = h;
 
-	calendar.resize(window.innerWidth / 2 - window.innerWidth / 5, window.innerHeight / 5);
-	calendar.render();
+	//MAIN PAGE DATA UPDATE
+	calendarObj.resize(window.innerWidth / 2 - window.innerWidth / 5, window.innerHeight / 5);
+	calendarObj.render();
 
 	eventsObj.resize(window.innerWidth/2, window.innerHeight / 5);
 	eventsObj.render();
@@ -107,7 +117,7 @@ function addEvent() {
 	let eventData = eventsObj.getSelectedData();
 
 	if (eventData) {
-		calendar.addEvent(eventData.id, eventData.color, "");	
+		calendarObj.addEvent(eventData.id, eventData.color, "");	
 	} 
 	
 	saveData();
@@ -115,6 +125,6 @@ function addEvent() {
 
 function saveData() {
 	saveObj.events = eventKey;
-	saveObj.days = calendar.getDayData();
+	saveObj.days = calendarObj.getDayData();
 	postData(saveObj);
 }

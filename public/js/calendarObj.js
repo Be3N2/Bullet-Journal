@@ -1,4 +1,4 @@
-class calendarObj {
+class calendar {
 
 	constructor (width, height, yearStruct, offX, offY) {
 		this.setupStruct = yearStruct;

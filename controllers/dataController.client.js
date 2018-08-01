@@ -9,7 +9,7 @@ function updateData (data) {
 	if (dataObj) console.log(dataObj);
 	if (data) 
 		dataObj = JSON.parse(data);
-	console.log(dataObj);
+	//console.log(dataObj);
 }
 
 ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateData));
