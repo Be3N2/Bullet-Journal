@@ -37,7 +37,7 @@ module.exports = function (passport) {
 
 					//add Year setup data here!
 					newUser.appData.days = [];
-					newUser.appData.events = [{"id": 7, "name": "Happy", "color": "#ff3af2"}];
+					newUser.appData.events = [{"id": 7, "name": "Happy", "color": "#ff3af2", "count": 0}];
 
 					newUser.save(function (err) {
 						if (err) {

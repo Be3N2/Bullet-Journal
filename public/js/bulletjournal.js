@@ -15,13 +15,13 @@ var yearStructure = [
 ];
 
 var eventKey = [
-	{"id": 1, "name": "Angry, frustrated", "color": "#B21700"},
-	{"id": 2, "name": "Average, normal, uneventful", "color": "#ca4a26"},
-	{"id": 3, "name": "Productive", "color": "#fff23a"},
-	{"id": 4, "name": "Sick, tired, lazy", "color": "#00ac18"},
-	{"id": 5, "name": "Sad, lonely", "color": "#22c5fe"},
-	{"id": 6, "name": "Disappointed", "color": "#3022fe"},
-	{"id": 7, "name": "Happy", "color": "#ff3af2"}
+	{"id": 1, "name": "Angry, frustrated", "color": "#B21700", "count": 0},
+	{"id": 2, "name": "Average, normal, uneventful", "color": "#ca4a26", "count": 0},
+	{"id": 3, "name": "Productive", "color": "#fff23a", "count": 0},
+	{"id": 4, "name": "Sick, tired, lazy", "color": "#00ac18", "count": 0},
+	{"id": 5, "name": "Sad, lonely", "color": "#22c5fe", "count": 0},
+	{"id": 6, "name": "Disappointed", "color": "#3022fe", "count": 0},
+	{"id": 7, "name": "Happy", "color": "#ff3af2", "count": 0}
 ];
 
 var saveObj = {
@@ -29,7 +29,6 @@ var saveObj = {
 	"events": []
 }
 
-var dataObj;
 var loaded = false;
 
 var canvas;
@@ -77,17 +76,25 @@ function setup() {
 
 function draw() {
 
-	//wait for data load
+	
+	
+}
+
+//Called from dataController ever time there is a data response
+function loadObjects(dataObj) {
+	//wait for initial data load (when loaded is still false)
 	if (!loaded && dataObj) {
-		calendarObj.loadData(dataObj);
-		eventsObj.loadData(dataObj.events);
 		eventsObj.addEventButton(addEvent);
 		loaded = true;
 	}
+
+	//load/update all the objects with the new data
+	eventsObj.loadData(dataObj.events);
+	calendarObj.loadData(dataObj);
+
 }
 
 function mouseClicked() {
-	//console.log(mouseX + "  |  " + mouseY);
 	
 	//MAIN PAGE MOUSE UPDATE
 	calendarObj.mouseAction(mouseX, mouseY);
@@ -124,7 +131,7 @@ function addEvent() {
 }
 
 function saveData() {
-	saveObj.events = eventKey;
+	saveObj.events = eventsObj.getEventData();
 	saveObj.days = calendarObj.getDayData();
 	postData(saveObj);
 }

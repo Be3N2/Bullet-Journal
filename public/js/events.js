@@ -29,6 +29,8 @@ class events {
 	loadData(data) {
 		
 		this.eventKey = data;
+		//javascript garbage collects all old category objects
+		this.categories = [];
 
 		for (let index in this.eventKey) {
 			
@@ -89,5 +91,9 @@ class events {
 		this.button = createButton('Add Event');
 		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
 		this.button.mousePressed(func);
+	}
+
+	getEventData() {
+		return this.eventKey;
 	}
 }
