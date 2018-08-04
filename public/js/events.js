@@ -12,7 +12,7 @@ class events {
 		this.selectedNum = 0; //selected category id
 		this.button;
 		this.buttonX = 50;
-		this.buttonY;
+		this.buttonY = 500;
 	}
 
 	render() {
@@ -45,9 +45,6 @@ class events {
 			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, object.name, object.color, this.length));
 			
 		}
-
-		this.render();
-
 	}
 
 	mouseAction(mouseX, mouseY) {
@@ -89,8 +86,8 @@ class events {
 
 	addEventButton(func) {
 		this.button = createButton('Add Event');
-		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
 		this.button.mousePressed(func);
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
 	}
 
 	getEventData() {

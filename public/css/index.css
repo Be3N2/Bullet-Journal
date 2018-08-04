@@ -23,6 +23,23 @@ p {
 	padding: 0;
 }
 
+/****** Tab Button Styling ******/
+
+.tabs {
+  background: #ededed;
+  border: 1px solid #ccc;
+  padding: 10px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.active {
+	background: #cbcbcb;
+	border: 2px solid #ccc;
+}
+
+button:focus { outline:0 !important; }
+
 /****** Header Styling ******/
 
 header p {
@@ -83,11 +100,6 @@ header a ~ p {
 
 /****** Logo Div Styling ******/
 
-img {
-	margin: 0 auto;
-	display: block;
-}
-
 .clementine-text { /* Styling for the Clementine.js text */
 	padding: 0;
 	margin: -25px 0 0 0;
@@ -96,7 +108,7 @@ img {
 	color: #FFA000;
 }
 
-/****** Click Styling ******/
+/****** Login Button Styling ******/
 
 .btn-container {	/* Styling for the div that contains the buttons */
 	margin: -10px auto 0 auto;
@@ -129,10 +141,6 @@ img {
 .btn-delete {	/* Styling for delete button */
 	background-color: #ECEFF1;
 	color: #212121;
-}
-
-#click-nbr {
-	font-weight: 400;
 }
 
 /****** Profile Styling ******/

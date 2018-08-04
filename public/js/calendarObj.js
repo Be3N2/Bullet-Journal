@@ -54,6 +54,7 @@ class calendar {
 		let monthNum = 0;
 
 		strokeWeight(1);
+		stroke(0);
 		fill(0);
 		textSize(18);
 		textAlign(LEFT, TOP);
@@ -136,7 +137,6 @@ class calendar {
 				}
 			}
 		}
-
-		this.render();
+		return "COMPLETED";
 	}
 }

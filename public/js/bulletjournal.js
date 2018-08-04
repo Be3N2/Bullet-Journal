@@ -33,18 +33,26 @@ var loaded = false;
 
 var canvas;
 
-var calendarObj;
+var headerObj;
 
+//CALENDAR
+var calendarObj;
 var eventsObj;
 
-var headerObj;
+//GRAPHS
+var bargraphObj;
+//piechart
+
+var calendarTabBtn, graphsTabBtn;
+var page = "CALENDAR";
 
 var rectSize = 25;
 
 function setup() {
 	canvas = createCanvas(window.innerWidth, window.innerHeight);
 
-
+	headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
+	
 	//CALENDAR
 	let calpositionX = window.innerWidth / 2 - window.innerWidth / 5;
 	let calpositionY = window.innerHeight / 5;
@@ -53,25 +61,26 @@ function setup() {
 	calendarObj.createDays();
 
 	//EVENTS
-	//let eventsposX = (window.innerWidth / 2) + ((window.innerWidth/ 5) - (12 * 25));
 	let eventsposX = window.innerWidth / 2;
 	let eventsposY = calpositionY;
 
 	eventsObj = new events(window.innerWidth / 3, 12 * rectSize * 2, eventsposX, eventsposY, rectSize, addEvent);
 
-	//HEADER
-	headerObj = new header(window.innerWidth, window.innerHeight / 8, 0,0);
-	
+	//GRAPHS
+	let bargraphposX = (window.innerWidth - 800) / 2;
+	let bargraphposY = window.innerHeight / 5;
+	bargraphObj = new bargraph(800, 500, bargraphposX, bargraphposY);
 
 	//INITIAL RENDER
 
 	background(255);
 
 	//RENDER MAIN PAGE
-	calendarObj.render();
-	eventsObj.render();
-	headerObj.render();
-
+	renderObjs();
+	
+	//render this last so always on top!
+	headerObj.render();		
+	tabs();
 }
 
 function draw() {
@@ -91,14 +100,33 @@ function loadObjects(dataObj) {
 	//load/update all the objects with the new data
 	eventsObj.loadData(dataObj.events);
 	calendarObj.loadData(dataObj);
+	bargraphObj.loadData(dataObj.events);
 
+	renderObjs();
+}
+
+function renderObjs() {
+	//clear canvas
+	background(255);
+
+	if (page == "CALENDAR") {
+		calendarObj.render();
+		eventsObj.render();
+	} else if (page == "GRAPHS") {
+		bargraphObj.render();
+	}
+	headerObj.render();	
 }
 
 function mouseClicked() {
 	
 	//MAIN PAGE MOUSE UPDATE
-	calendarObj.mouseAction(mouseX, mouseY);
-	eventsObj.mouseAction(mouseX, mouseY);
+	if (page == "CALENDAR") {
+		calendarObj.mouseAction(mouseX, mouseY);
+		eventsObj.mouseAction(mouseX, mouseY);
+	} else if (page == "GRAPHS") {
+
+	}
 
 }
 
@@ -106,18 +134,19 @@ window.onresize = function() {
 	var w = window.innerWidth;
 	var h = window.innerHeight;  
 	canvas.size(w,h);
-	width = w;
-	height = h;
 
-	//MAIN PAGE DATA UPDATE
+	//RESIZE
 	calendarObj.resize(window.innerWidth / 2 - window.innerWidth / 5, window.innerHeight / 5);
-	calendarObj.render();
-
 	eventsObj.resize(window.innerWidth/2, window.innerHeight / 5);
-	eventsObj.render();
-
 	headerObj.resize(window.innerWidth, window.innerHeight);
-	headerObj.render();
+
+	//RENDER
+	renderObjs();
+		
+	let y = calendarObj.offsetY + calendarObj.HEIGHT;
+	calendarTabBtn.position(window.innerWidth / 2 - 75 - 118, y);
+	graphsTabBtn.position(window.innerWidth / 2 + 75 - 118, y);
+
 };
 
 function addEvent() {
@@ -135,3 +164,43 @@ function saveData() {
 	saveObj.days = calendarObj.getDayData();
 	postData(saveObj);
 }
+
+function tabs() {
+	let y = calendarObj.offsetY + calendarObj.HEIGHT;
+
+	calendarTabBtn = createButton("Calander");
+	calendarTabBtn.class("tabs active");
+	calendarTabBtn.position(window.innerWidth / 2 - 75 - 118, y);
+
+	graphsTabBtn = createButton("Graphs");
+	graphsTabBtn.class("tabs");
+	graphsTabBtn.position(window.innerWidth / 2 + 75 -118, y);
+
+	calendarTabBtn.mousePressed(function() {
+		
+		//button styling
+		calendarTabBtn.removeClass("active");
+		graphsTabBtn.removeClass("active");
+
+		calendarTabBtn.addClass("active");
+
+		if (page != "CALENDAR") {
+			page = "CALENDAR";
+			renderObjs();	
+		}
+	});
+
+	graphsTabBtn.mousePressed(function() {
+
+		//button styling
+		calendarTabBtn.removeClass("active");
+		graphsTabBtn.removeClass("active");
+
+		graphsTabBtn.addClass("active");
+	
+		if (page != "GRAPHS") {
+			page = "GRAPHS";
+			renderObjs();	
+		}
+	});
+}	
