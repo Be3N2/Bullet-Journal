@@ -17,6 +17,7 @@ class category {
 		//fill(200);
 		//rect(this.posX + offsetX, this.posY + offsetY, this.WIDTH, this.HEIGHT);
 		strokeWeight(0);
+		textSize(18);
 
 		if (this.selected) {
 			

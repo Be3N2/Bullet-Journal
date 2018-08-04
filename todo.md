@@ -11,7 +11,7 @@
 	* Different border or some sort of black lines like selection?
 * Bar chart && Pi Chart For Analysis display page
 	* ~~Server tally up number with an event and add it to event object~~
-	* Multiple tabs to choose from for calendar display or analysis display
+	* ~~Multiple tabs to choose from for calendar display or analysis display~~
 	* Bar chart displaying event name, color, and count data 
 	* Pi chart displaying event name, color, and count data
 * Pm2 Server set up

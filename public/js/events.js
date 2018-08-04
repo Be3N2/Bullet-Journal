@@ -23,7 +23,11 @@ class events {
 		for (let categoryObj in this.categories) {
 			this.categories[categoryObj].render(this.offsetX, this.offsetY);
 		}
-
+		
+		if (this.button) {
+			this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
+			this.button.show();
+		}
 	}
 
 	loadData(data) {
@@ -32,18 +36,17 @@ class events {
 		//javascript garbage collects all old category objects
 		this.categories = [];
 
+		this.buttonY = this.gap * (this.eventKey.length + 2);
+		
 		for (let index in this.eventKey) {
 			
 			let object = this.eventKey[index];
-			
-			let nameWidth = textWidth(object.name);
-			
+		 
 			let posX = 50;
 			let posY = 50 + (this.gap * index);
-			this.buttonY = posY + this.gap;
 
-			this.categories.push(new category(nameWidth + this.length * 2, this.length, posX, posY, object.name, object.color, this.length));
-			
+			this.categories.push(new category(this.WIDTH / 2, this.length, posX, posY, object.name, object.color, this.length));
+
 		}
 	}
 
@@ -81,13 +84,17 @@ class events {
 	resize(posX, posY) {
 		this.offsetX = posX;
 		this.offsetY = posY;
-		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
 	}
 
 	addEventButton(func) {
 		this.button = createButton('Add Event');
 		this.button.mousePressed(func);
-		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY * 1.4);
+		this.button.position(this.buttonX + this.offsetX, this.buttonY + this.offsetY);
+	}
+
+	hideButton() {
+		this.button.style('display', 'none');
 	}
 
 	getEventData() {

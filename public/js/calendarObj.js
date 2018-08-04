@@ -137,6 +137,5 @@ class calendar {
 				}
 			}
 		}
-		return "COMPLETED";
 	}
 }

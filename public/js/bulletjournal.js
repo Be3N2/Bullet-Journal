@@ -44,7 +44,7 @@ var bargraphObj;
 //piechart
 
 var calendarTabBtn, graphsTabBtn;
-var page = "CALENDAR";
+var page = "GRAPHS";
 
 var rectSize = 25;
 
@@ -67,9 +67,9 @@ function setup() {
 	eventsObj = new events(window.innerWidth / 3, 12 * rectSize * 2, eventsposX, eventsposY, rectSize, addEvent);
 
 	//GRAPHS
-	let bargraphposX = (window.innerWidth - 800) / 2;
+	let bargraphposX = (window.innerWidth - (window.innerWidth * .6)) / 2;
 	let bargraphposY = window.innerHeight / 5;
-	bargraphObj = new bargraph(800, 500, bargraphposX, bargraphposY);
+	bargraphObj = new bargraph(window.innerWidth * .6, window.innerHeight /2, bargraphposX, bargraphposY);
 
 	//INITIAL RENDER
 
@@ -94,6 +94,7 @@ function loadObjects(dataObj) {
 	//wait for initial data load (when loaded is still false)
 	if (!loaded && dataObj) {
 		eventsObj.addEventButton(addEvent);
+		if (page == "GRAPHS") eventsObj.hideButton();
 		loaded = true;
 	}
 
@@ -138,6 +139,7 @@ window.onresize = function() {
 	//RESIZE
 	calendarObj.resize(window.innerWidth / 2 - window.innerWidth / 5, window.innerHeight / 5);
 	eventsObj.resize(window.innerWidth/2, window.innerHeight / 5);
+	bargraphObj.resize((window.innerWidth - bargraphObj.WIDTH) / 2, window.innerHeight / 5);
 	headerObj.resize(window.innerWidth, window.innerHeight);
 
 	//RENDER
@@ -201,6 +203,7 @@ function tabs() {
 		if (page != "GRAPHS") {
 			page = "GRAPHS";
 			renderObjs();	
+			eventsObj.hideButton();
 		}
 	});
 }	
